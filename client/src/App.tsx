@@ -41,7 +41,7 @@ const App: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [editHotspot, setEditHotspot] = useState<{x: number, y: number} | null>(null);
   const [displayHotspot, setDisplayHotspot] = useState<{x: number, y: number} | null>(null);
-  const [activeTab, setActiveTab] = useState<Tab>('retouch');
+  const [activeTab, setActiveTab] = useState<Tab>('filters');
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
   const [aspect, setAspect] = useState<number | undefined>();
@@ -98,7 +98,7 @@ const App: React.FC = () => {
     setHistoryIndex(0);
     setEditHotspot(null);
     setDisplayHotspot(null);
-    setActiveTab('retouch');
+    setActiveTab('filters');
     setCrop(undefined);
     setCompletedCrop(undefined);
   }, []);
@@ -277,7 +277,7 @@ const App: React.FC = () => {
     }
   };
 
-  const tabs: Tab[] = ['retouch', 'adjust', 'filters', 'crop'];
+  const tabs: Tab[] = ['filters', 'retouch', 'adjust', 'crop'];
   
   const handleSwipe = useCallback((direction: 'left' | 'right') => {
     const currentIndex = tabs.indexOf(activeTab);
@@ -448,9 +448,9 @@ const App: React.FC = () => {
             Swipe left or right to switch tabs
           </div>
           {[
+            { id: 'filters', label: 'Filters' },
             { id: 'retouch', label: 'Retouch' },
             { id: 'adjust', label: 'Adjust' },
-            { id: 'filters', label: 'Filters' },
             { id: 'crop', label: 'Crop' },
           ].map((tab) => (
             <button
