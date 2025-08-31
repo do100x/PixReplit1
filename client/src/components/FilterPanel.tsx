@@ -1,15 +1,17 @@
 import { useState, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { generateFilteredImage } from '@/services/geminiService';
-import { FilterPreset } from '@/types';
 
 interface FilterPanelProps {
-  currentImage: File;
+  onApplyFilter: (filterPrompt: string) => Promise<void>;
   isLoading: boolean;
-  setIsLoading: (loading: boolean) => void;
-  setError: (error: string | null) => void;
-  addImageToHistory: (file: File) => void;
+}
+
+interface FilterPreset {
+  id: string;
+  name: string;
+  prompt: string;
+  gradient: string;
 }
 
 const FILTER_PRESETS: FilterPreset[] = [
@@ -24,42 +26,18 @@ const FILTER_PRESETS: FilterPreset[] = [
 ];
 
 export default function FilterPanel({
-  currentImage,
-  isLoading,
-  setIsLoading,
-  setError,
-  addImageToHistory
+  onApplyFilter,
+  isLoading
 }: FilterPanelProps) {
   const [prompt, setPrompt] = useState<string>('');
-
-  const handleApplyFilter = useCallback(async (filterPrompt: string) => {
-    if (!currentImage) {
-      setError('No image loaded to apply a filter to.');
-      return;
-    }
-
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const filteredImageFile = await generateFilteredImage(currentImage, filterPrompt);
-      addImageToHistory(filteredImageFile);
-      setPrompt('');
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred.';
-      setError(`Failed to apply the filter. ${errorMessage}`);
-      console.error(err);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [currentImage, setIsLoading, setError, addImageToHistory]);
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     if (prompt.trim()) {
-      await handleApplyFilter(prompt.trim());
+      await onApplyFilter(prompt.trim());
+      setPrompt('');
     }
-  }, [prompt, handleApplyFilter]);
+  }, [prompt, onApplyFilter]);
 
   return (
     <div className="bg-card border border-border rounded-lg p-6">
@@ -96,7 +74,7 @@ export default function FilterPanel({
           <div
             key={filter.id}
             className="group cursor-pointer"
-            onClick={() => handleApplyFilter(filter.prompt)}
+            onClick={() => !isLoading && onApplyFilter(filter.prompt)}
             data-testid={`filter-preset-${filter.id}`}
           >
             <div 

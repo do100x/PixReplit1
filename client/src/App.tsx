@@ -311,7 +311,7 @@ const App: React.FC = () => {
     }
 
     if (!currentImageUrl) {
-      return <StartScreen onFileSelect={handleFileSelect} />;
+      return <StartScreen onImageUpload={handleImageUpload} />;
     }
 
     const imageDisplay = (

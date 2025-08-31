@@ -6,7 +6,7 @@
 import React, { useState } from 'react';
 
 interface AdjustmentPanelProps {
-  onApplyAdjustment: (prompt: string) => void;
+  onApplyAdjustment: (prompt: string) => Promise<void>;
   isLoading: boolean;
 }
 
