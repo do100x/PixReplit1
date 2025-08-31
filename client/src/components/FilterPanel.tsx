@@ -1,0 +1,111 @@
+import { useState, useCallback } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { generateFilteredImage } from '@/services/geminiService';
+import { FilterPreset } from '@/types';
+
+interface FilterPanelProps {
+  currentImage: File;
+  isLoading: boolean;
+  setIsLoading: (loading: boolean) => void;
+  setError: (error: string | null) => void;
+  addImageToHistory: (file: File) => void;
+}
+
+const FILTER_PRESETS: FilterPreset[] = [
+  { id: 'vintage', name: 'Vintage', prompt: 'apply a warm vintage film look with sepia tones', gradient: 'from-amber-400 to-orange-500' },
+  { id: 'cinematic', name: 'Cinematic', prompt: 'apply a cinematic blue and orange color grading', gradient: 'from-blue-900 to-purple-900' },
+  { id: 'bw', name: 'B&W', prompt: 'convert to black and white with high contrast', gradient: 'from-gray-700 to-gray-900' },
+  { id: 'neon', name: 'Neon', prompt: 'apply a cyberpunk neon glow effect with vibrant colors', gradient: 'from-pink-500 to-violet-500' },
+  { id: 'soft', name: 'Soft Focus', prompt: 'apply a soft dreamy filter with gentle lighting', gradient: 'from-rose-300 to-pink-300' },
+  { id: 'dramatic', name: 'Dramatic', prompt: 'enhance drama with deep shadows and rich colors', gradient: 'from-red-600 to-black' },
+  { id: 'pastel', name: 'Pastel', prompt: 'apply soft pastel colors with light airy feeling', gradient: 'from-cyan-200 to-blue-200' },
+  { id: 'noir', name: 'Film Noir', prompt: 'apply classic film noir style with dramatic lighting', gradient: 'from-gray-900 to-black' },
+];
+
+export default function FilterPanel({
+  currentImage,
+  isLoading,
+  setIsLoading,
+  setError,
+  addImageToHistory
+}: FilterPanelProps) {
+  const [prompt, setPrompt] = useState<string>('');
+
+  const handleApplyFilter = useCallback(async (filterPrompt: string) => {
+    if (!currentImage) {
+      setError('No image loaded to apply a filter to.');
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const filteredImageFile = await generateFilteredImage(currentImage, filterPrompt);
+      addImageToHistory(filteredImageFile);
+      setPrompt('');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred.';
+      setError(`Failed to apply the filter. ${errorMessage}`);
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [currentImage, setIsLoading, setError, addImageToHistory]);
+
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (prompt.trim()) {
+      await handleApplyFilter(prompt.trim());
+    }
+  }, [prompt, handleApplyFilter]);
+
+  return (
+    <div className="bg-card border border-border rounded-lg p-6">
+      <div className="text-center mb-6">
+        <h3 className="text-lg font-semibold mb-2">Creative Filters</h3>
+        <p className="text-muted-foreground">Apply artistic styles and effects to your image</p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="flex items-center gap-3 mb-6">
+        <div className="flex-1">
+          <Input
+            type="text"
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            placeholder="e.g., 'vintage film look', 'cyberpunk style', 'oil painting effect'"
+            className="w-full bg-input border border-border text-foreground text-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 placeholder:text-muted-foreground"
+            disabled={isLoading}
+            data-testid="input-filter-prompt"
+          />
+        </div>
+        <Button
+          type="submit"
+          disabled={isLoading || !prompt.trim()}
+          className="bg-gradient-to-r from-primary to-purple-500 text-white font-semibold py-3 px-8 hover:shadow-lg hover:shadow-primary/25 transition-all duration-200 hover:-translate-y-0.5 active:scale-95 disabled:from-primary/50 disabled:to-purple-500/50 disabled:shadow-none disabled:cursor-not-allowed disabled:transform-none"
+          data-testid="button-apply-filter"
+        >
+          Apply
+        </Button>
+      </form>
+
+      {/* Filter Presets */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {FILTER_PRESETS.map((filter) => (
+          <div
+            key={filter.id}
+            className="group cursor-pointer"
+            onClick={() => handleApplyFilter(filter.prompt)}
+            data-testid={`filter-preset-${filter.id}`}
+          >
+            <div 
+              className={`aspect-square bg-gradient-to-br ${filter.gradient} rounded-lg mb-2 transition-transform duration-200 group-hover:scale-105 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            ></div>
+            <p className="text-sm font-medium text-center">{filter.name}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
