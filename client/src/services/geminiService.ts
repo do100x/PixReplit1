@@ -192,3 +192,43 @@ Output: Return ONLY the final adjusted image. Do not return text.`;
 
   return handleApiResponse(response, 'adjustment');
 };
+
+/**
+ * Generates a preview image for a filter style using generative AI.
+ * @param stylePrompt The text prompt describing the desired style.
+ * @param styleName The name of the style for file naming.
+ * @returns A promise that resolves to the data URL of the preview image.
+ */
+export const generateFilterPreview = async (
+  stylePrompt: string,
+  styleName: string
+): Promise<string> => {
+  console.log(`Generating preview for style: ${styleName}`);
+  
+  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY! });
+  
+  const prompt = `Create a beautiful preview image showcasing this style: "${stylePrompt}"
+
+Requirements:
+- Create an artistic demonstration image that clearly shows the style characteristics
+- The image should be suitable as a filter preview thumbnail
+- Focus on the visual style elements described in the prompt
+- Make it appealing and representative of the style
+- Size should be square format (1:1 aspect ratio)
+- High quality but optimized for web use
+
+Style: ${stylePrompt}
+
+Output: Return ONLY the preview image. Do not return text.`;
+
+  console.log('Generating preview image with Gemini...');
+  
+  const response: GenerateContentResponse = await ai.models.generateContent({
+    model: 'gemini-2.0-flash-preview-image-generation',
+    contents: { parts: [{ text: prompt }] },
+  });
+
+  console.log(`Generated preview for ${styleName}`);
+
+  return handleApiResponse(response, `preview for ${styleName}`);
+};
