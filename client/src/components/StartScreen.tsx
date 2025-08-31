@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react';
-import { Upload, ImageIcon } from 'lucide-react';
+import { Upload } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface StartScreenProps {
@@ -82,7 +82,7 @@ export default function StartScreen({ onImageUpload }: StartScreenProps) {
         className="border-2 border-dashed border-border hover:border-primary/50 rounded-xl p-8 sm:p-12 text-center transition-all duration-300 hover:bg-accent/20 cursor-pointer touch-manipulation"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
-        onClick={() => fileInputRef.current?.click()}
+        onClick={() => galleryInputRef.current?.click()}
         data-testid="upload-zone"
       >
         <div className="flex flex-col items-center gap-4">
@@ -91,18 +91,7 @@ export default function StartScreen({ onImageUpload }: StartScreenProps) {
           </div>
           <div>
             <h3 className="text-lg sm:text-xl font-semibold mb-2">Upload Your Image</h3>
-            <p className="text-muted-foreground mb-4 text-sm sm:text-base">Tap to browse and select your photos</p>
-            <Button 
-              onClick={(e) => {
-                e.stopPropagation();
-                galleryInputRef.current?.click();
-              }}
-              className="bg-gradient-to-r from-primary to-purple-500 text-white px-8 py-4 font-medium hover:shadow-lg hover:shadow-primary/25 transition-all duration-200 touch-manipulation text-base min-h-[48px] active:scale-95 flex items-center gap-2"
-              data-testid="button-choose-file"
-            >
-              <ImageIcon className="w-5 h-5" />
-              Choose Photos
-            </Button>
+            <p className="text-muted-foreground mb-4 text-sm sm:text-base">Tap anywhere here to select photos</p>
           </div>
           <p className="text-xs sm:text-sm text-muted-foreground">
             Supports JPG, PNG, WebP up to 10MB
