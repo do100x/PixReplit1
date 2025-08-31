@@ -167,20 +167,29 @@ const FILTER_PRESETS: FilterPreset[] = [
 
 function FilterPreviewImage({ filter, isLoading }: { filter: FilterPreset; isLoading: boolean }) {
   const [imageError, setImageError] = useState(false);
+  const [imageLoading, setImageLoading] = useState(true);
 
   return (
     <div 
-      className={`aspect-square rounded-lg mb-2 transition-transform duration-200 group-hover:scale-105 active:scale-95 min-h-[80px] sm:min-h-[100px] overflow-hidden ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+      className={`aspect-square rounded-xl overflow-hidden border-2 border-gray-600/30 shadow-lg min-h-[90px] sm:min-h-[110px] relative ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
     >
       {!imageError ? (
-        <img
-          src={filter.previewImage}
-          alt={filter.name}
-          className="w-full h-full object-cover"
-          onError={() => setImageError(true)}
-        />
+        <>
+          <img
+            src={filter.previewImage}
+            alt={filter.name}
+            className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoading ? 'opacity-0' : 'opacity-100'}`}
+            onLoad={() => setImageLoading(false)}
+            onError={() => setImageError(true)}
+          />
+          {imageLoading && (
+            <div className={`absolute inset-0 bg-gradient-to-br ${filter.fallbackGradient} animate-pulse`}></div>
+          )}
+        </>
       ) : (
-        <div className={`w-full h-full bg-gradient-to-br ${filter.fallbackGradient}`}></div>
+        <div className={`w-full h-full bg-gradient-to-br ${filter.fallbackGradient} flex items-center justify-center`}>
+          <div className="w-8 h-8 border-2 border-white/50 border-t-white rounded-full animate-spin"></div>
+        </div>
       )}
     </div>
   );
@@ -201,10 +210,10 @@ export default function FilterPanel({
   }, [prompt, onApplyFilter]);
 
   return (
-    <div className="bg-card border border-border rounded-lg p-4 sm:p-6">
+    <div className="bg-gray-900/80 border border-gray-700/50 rounded-2xl p-4 sm:p-6 shadow-lg backdrop-blur-md">
       <div className="text-center mb-4 sm:mb-6">
-        <h3 className="text-base sm:text-lg font-semibold mb-2">Creative Filters</h3>
-        <p className="text-muted-foreground text-sm sm:text-base">Apply artistic styles and effects to your image</p>
+        <h3 className="text-lg sm:text-xl font-bold mb-2 text-white">Creative Filters</h3>
+        <p className="text-gray-300 text-sm sm:text-base">Apply artistic styles and effects to your image</p>
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-4 sm:mb-6">
@@ -230,16 +239,16 @@ export default function FilterPanel({
       </form>
 
       {/* Filter Presets */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent">
+      <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 max-h-[55vh] overflow-y-auto scroll-smooth filter-scroll">
         {FILTER_PRESETS.map((filter) => (
           <div
             key={filter.id}
-            className="group cursor-pointer touch-manipulation"
+            className="group cursor-pointer touch-manipulation transform transition-all duration-200 hover:scale-105 active:scale-95"
             onClick={() => !isLoading && onApplyFilter(filter.prompt)}
             data-testid={`filter-preset-${filter.id}`}
           >
             <FilterPreviewImage filter={filter} isLoading={isLoading} />
-            <p className="text-xs sm:text-sm font-medium text-center">{filter.name}</p>
+            <p className="text-xs sm:text-sm font-semibold text-center text-gray-200 mt-2 group-hover:text-white transition-colors">{filter.name}</p>
           </div>
         ))}
       </div>

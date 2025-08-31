@@ -13,6 +13,7 @@ import FilterPanel from './components/FilterPanel';
 import AdjustmentPanel from './components/AdjustmentPanel';
 import CropPanel from './components/CropPanel';
 import { UndoIcon, RedoIcon, EyeIcon } from './components/icons';
+import { Sparkles, Edit3, Settings, Scissors } from 'lucide-react';
 import StartScreen from './components/StartScreen';
 
 // Helper to convert a data URL string to a File object
@@ -363,7 +364,7 @@ const App: React.FC = () => {
             key={originalImageUrl}
             src={originalImageUrl}
             alt="Original"
-            className="w-full h-auto object-contain max-h-[40vh] sm:max-h-[60vh] rounded-xl pointer-events-none"
+            className="w-full h-auto object-contain max-h-[35vh] sm:max-h-[55vh] rounded-xl pointer-events-none shadow-lg"
           />
         )}
 
@@ -374,7 +375,7 @@ const App: React.FC = () => {
           src={currentImageUrl}
           alt="Current"
           onClick={handleImageClick}
-          className={`absolute top-0 left-0 w-full h-auto object-contain max-h-[40vh] sm:max-h-[60vh] rounded-xl transition-opacity duration-200 ease-in-out ${
+          className={`absolute top-0 left-0 w-full h-auto object-contain max-h-[35vh] sm:max-h-[55vh] rounded-xl transition-opacity duration-200 ease-in-out shadow-lg ${
             isComparing ? 'opacity-0' : 'opacity-100'
           } ${activeTab === 'retouch' ? 'cursor-crosshair' : ''}`}
         />
@@ -388,15 +389,15 @@ const App: React.FC = () => {
         key={`crop-${currentImageUrl}`}
         src={currentImageUrl}
         alt="Crop this image"
-        className="w-full h-auto object-contain max-h-[40vh] sm:max-h-[60vh] rounded-xl"
+        className="w-full h-auto object-contain max-h-[35vh] sm:max-h-[55vh] rounded-xl shadow-lg"
       />
     );
 
     return (
       <div className="w-full max-w-6xl mx-auto animate-fade-in space-y-4 sm:space-y-6 relative px-4 sm:px-0">
         {/* Image Canvas Area */}
-        <div className="relative">
-          <div className="relative bg-gray-900/50 border border-gray-700 rounded-xl overflow-hidden">
+        <div className="relative px-2 sm:px-0">
+          <div className="relative bg-gradient-to-b from-gray-900/80 to-gray-800/80 border border-gray-700/50 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-sm p-3 sm:p-4">
             {isLoading && (
               <div className="absolute inset-0 bg-black/50 z-50 flex flex-col items-center justify-center gap-4 animate-fade-in">
                 <Spinner />
@@ -443,28 +444,33 @@ const App: React.FC = () => {
         </div>
 
         {/* Tab Navigation */}
-        <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-1 grid grid-cols-4 gap-1 sm:flex sm:items-center relative">
-          <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs text-gray-500 sm:hidden">
+        <div className="bg-gray-900/80 border border-gray-700/50 rounded-2xl p-2 grid grid-cols-4 gap-2 sm:flex sm:items-center relative shadow-lg backdrop-blur-md">
+          <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 text-xs text-gray-500 sm:hidden">
             Swipe left or right to switch tabs
           </div>
           {[
-            { id: 'filters', label: 'Filters' },
-            { id: 'retouch', label: 'Retouch' },
-            { id: 'adjust', label: 'Adjust' },
-            { id: 'crop', label: 'Crop' },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as Tab)}
-              className={`w-full py-4 px-3 sm:px-6 rounded-md font-semibold transition-all duration-200 touch-manipulation min-h-[48px] ${
-                activeTab === tab.id
-                  ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-lg'
-                  : 'text-gray-400 hover:text-white hover:bg-gray-700/50 active:bg-gray-700'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
+            { id: 'filters', label: 'Filters', icon: Sparkles },
+            { id: 'retouch', label: 'Retouch', icon: Edit3 },
+            { id: 'adjust', label: 'Adjust', icon: Settings },
+            { id: 'crop', label: 'Crop', icon: Scissors },
+          ].map((tab) => {
+            const Icon = tab.icon;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as Tab)}
+                className={`w-full py-3 px-2 sm:px-4 rounded-xl font-semibold transition-all duration-200 touch-manipulation min-h-[56px] flex flex-col items-center justify-center gap-1 active:scale-95 ${
+                  activeTab === tab.id
+                    ? 'bg-gradient-to-b from-blue-600 to-blue-500 text-white shadow-lg shadow-blue-500/25 transform scale-105'
+                    : 'text-gray-400 hover:text-white hover:bg-gray-700/60 active:bg-gray-700'
+                }`}
+                data-testid={`tab-${tab.id}`}
+              >
+                <Icon className="w-5 h-5 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm">{tab.label}</span>
+              </button>
+            );
+          })}
         </div>
 
         {/* Tab Content Panels */}
@@ -539,60 +545,70 @@ const App: React.FC = () => {
     }}>
       <Header />
       
-      <main className="p-4 sm:p-6 lg:p-8">
-        <div className="flex flex-col items-center gap-8">
+      <main className="p-3 sm:p-6 lg:p-8 pb-6">
+        <div className="flex flex-col items-center gap-6 sm:gap-8">
           {/* Toolbar */}
           {currentImage && (
-            <div className="flex items-center justify-center gap-2 sm:gap-3 bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg px-3 sm:px-4 py-3">
+            <div className="flex items-center justify-center gap-2 sm:gap-3 bg-gray-900/90 backdrop-blur-md border border-gray-700/50 rounded-xl px-2 sm:px-4 py-2 shadow-lg">
               <button
                 onClick={handleUndo}
                 disabled={!canUndo}
-                className="p-3 sm:p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation min-h-[48px] min-w-[48px] flex items-center justify-center active:scale-95"
+                className="p-3 text-gray-400 hover:text-white hover:bg-gray-700/80 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation min-h-[52px] min-w-[52px] flex items-center justify-center active:scale-95 active:bg-gray-600"
                 title="Undo"
+                data-testid="button-undo"
               >
-                <UndoIcon className="w-5 h-5" />
+                <UndoIcon className="w-6 h-6" />
               </button>
               
               <button
                 onClick={handleRedo}
                 disabled={!canRedo}
-                className="p-3 sm:p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation min-h-[48px] min-w-[48px] flex items-center justify-center active:scale-95"
+                className="p-3 text-gray-400 hover:text-white hover:bg-gray-700/80 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation min-h-[52px] min-w-[52px] flex items-center justify-center active:scale-95 active:bg-gray-600"
                 title="Redo"
+                data-testid="button-redo"
               >
-                <RedoIcon className="w-5 h-5" />
+                <RedoIcon className="w-6 h-6" />
               </button>
               
-              <div className="h-6 w-px bg-gray-600"></div>
+              <div className="h-8 w-px bg-gray-600/50"></div>
               
               {historyIndex > 0 && (
                 <button
                   onClick={() => setIsComparing(!isComparing)}
-                  className="p-3 sm:p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-md transition-colors touch-manipulation min-h-[48px] min-w-[48px] flex items-center justify-center active:scale-95"
+                  className={`p-3 rounded-xl transition-all duration-200 touch-manipulation min-h-[52px] min-w-[52px] flex items-center justify-center active:scale-95 ${
+                    isComparing 
+                      ? 'text-blue-400 bg-blue-500/20 hover:bg-blue-500/30' 
+                      : 'text-gray-400 hover:text-white hover:bg-gray-700/80 active:bg-gray-600'
+                  }`}
                   title="Compare with original"
+                  data-testid="button-compare"
                 >
-                  <EyeIcon className="w-5 h-5" />
+                  <EyeIcon className="w-6 h-6" />
                 </button>
               )}
               
-              <div className="h-6 w-px bg-gray-600"></div>
+              <div className="h-8 w-px bg-gray-600/50"></div>
               
               <button
                 onClick={handleReset}
-                className="px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-700 rounded-md transition-colors touch-manipulation min-h-[48px] active:scale-95"
+                className="px-4 py-3 text-sm font-semibold text-gray-300 hover:text-white hover:bg-gray-700/80 rounded-xl transition-all duration-200 touch-manipulation min-h-[52px] active:scale-95 active:bg-gray-600"
+                data-testid="button-reset"
               >
                 Reset
               </button>
               
               <button
                 onClick={handleUploadNew}
-                className="px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-700 rounded-md transition-colors touch-manipulation min-h-[48px] active:scale-95"
+                className="px-4 py-3 text-sm font-semibold text-gray-300 hover:text-white hover:bg-gray-700/80 rounded-xl transition-all duration-200 touch-manipulation min-h-[52px] active:scale-95 active:bg-gray-600"
+                data-testid="button-new-image"
               >
                 New Image
               </button>
               
               <button
                 onClick={handleDownload}
-                className="px-4 py-3 text-sm font-medium bg-gradient-to-r from-green-600 to-green-500 text-white rounded-md hover:shadow-lg hover:shadow-green-500/25 transition-all duration-200 touch-manipulation min-h-[48px] active:scale-95"
+                className="px-5 py-3 text-sm font-semibold bg-gradient-to-r from-green-600 to-green-500 text-white rounded-xl hover:shadow-lg hover:shadow-green-500/25 hover:from-green-500 hover:to-green-400 transition-all duration-200 touch-manipulation min-h-[52px] active:scale-95"
+                data-testid="button-download"
               >
                 Download
               </button>
