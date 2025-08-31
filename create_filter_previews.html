@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Filter Previews</title>
+</head>
+<body>
+    <script>
+        const filters = [
+            { id: '01_studio_ghibli', colors: ['#4CAF50', '#81C784', '#A5D6A7'] },
+            { id: '02_miyazaki_style', colors: ['#26A69A', '#4DB6AC', '#80CBC4'] },
+            { id: '03_cyberpunk', colors: ['#00BCD4', '#8E24AA', '#1A237E'] },
+            { id: '04_y2k_aesthetic', colors: ['#E3F2FD', '#BBDEFB', '#2196F3'] },
+            { id: '05_vaporwave', colors: ['#E91E63', '#9C27B0', '#673AB7'] },
+            { id: '06_cottagecore', colors: ['#66BB6A', '#FFA726', '#8D6E63'] },
+            { id: '07_dark_academia', colors: ['#FF8F00', '#5D4037', '#3E2723'] },
+            { id: '08_anime_manga', colors: ['#FF5722', '#FF9800', '#FFC107'] },
+            { id: '09_pixar_3d', colors: ['#FFEB3B', '#FF9800', '#F57C00'] },
+            { id: '10_art_nouveau', colors: ['#FFD700', '#FF8F00', '#F57C00'] },
+            { id: '11_minimalism', colors: ['#EEEEEE', '#BDBDBD', '#757575'] },
+            { id: '12_maximalism', colors: ['#E91E63', '#FF5722', '#FF9800'] },
+            { id: '13_steampunk', colors: ['#FF8F00', '#D84315', '#BF360C'] },
+            { id: '14_synthwave_retrowave', colors: ['#E91E63', '#2196F3', '#9C27B0'] },
+            { id: '15_pop_art', colors: ['#F44336', '#FFEB3B', '#2196F3'] },
+            { id: '16_watercolor', colors: ['#81C784', '#9C27B0', '#64B5F6'] },
+            { id: '17_oil_painting', colors: ['#FF8F00', '#D32F2F', '#8D6E63'] },
+            { id: '18_pixel_art', colors: ['#4CAF50', '#2196F3', '#FF9800'] },
+            { id: '19_surrealism', colors: ['#9C27B0', '#3F51B5', '#E91E63'] },
+            { id: '20_glassmorphism', colors: ['#E3F2FD', '#3F51B5', '#1976D2'] },
+            { id: '21_coquette_aesthetic', colors: ['#FCE4EC', '#F8BBD9', '#E91E63'] }
+        ];
+
+        function createGradientImage(colors, filename) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 200;
+            canvas.height = 200;
+            const ctx = canvas.getContext('2d');
+
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, colors[0]);
+            gradient.addColorStop(0.5, colors[1]);
+            gradient.addColorStop(1, colors[2]);
+
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            canvas.toBlob((blob) => {
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = filename + '.jpg';
+                link.click();
+            }, 'image/jpeg', 0.9);
+        }
+
+        // Create all filter preview images
+        filters.forEach(filter => {
+            setTimeout(() => {
+                createGradientImage(filter.colors, filter.id);
+            }, 100);
+        });
+    </script>
+    <p>Creating filter preview images...</p>
+</body>
+</html>
