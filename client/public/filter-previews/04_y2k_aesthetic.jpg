@@ -1,0 +1,162 @@
+<!DOCTYPE html><html  lang="en" data-capo=""><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Genspark</title>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/entry.DJLeaEbN.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/_...ObNt6T_F.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/index_layout._WNrIexM.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/menu.BeTzlSPA.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/feedback_dialog.DMSfPXgH.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/ResearchMeModal.CIL8KOGg.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/YoutubeWidget.CYLc38aB.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/AiDownloaderDialog.C1CVRQ4I.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/FileTypeIcon.BQIzFgr3.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/LoadingAnimation.B2xv_2PZ.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/agent_task_list.CdeXNYqb.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/QuotaExceed.DgKuFXXK.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/PricingWindowForPlusPlan.BMwEJF2I.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/PlanPlusDesc.BEZnn-4W.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/PlanProDesc.Ciw5VEmS.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/PricingWindowForTeamCreditsClaim.CbB1SWx9.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/PlanCreditDesc.Cl6eh03Q.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/LoginGuidance.CXfR7d9m.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/ImageGenerating.CYegq0bI.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/LoadingIcon.DBGzfwQJ.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/data.Du5y1n5K.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/GlobalDialog.BK4BTWTM.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/VideoPlayer.DpBmwm2s.css" crossorigin>
+<link rel="stylesheet" href="https://www.genspark.ai/_nuxt/ImagePreview.VFVnxuOj.css" crossorigin>
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/Cn72toNb.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/BFh7_w_Q.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CImXh8vk.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/BDn-lbkS.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/Oe0BEOyg.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/B-VstBgx.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CWc3imI4.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/DBBnkozr.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CXTMtwkK.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/DDsBPygF.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/D-z_ISw5.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/nn2jdgHe.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/iXyRsVO1.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/dtZEk6pQ.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/P7LDOl0u.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/DT-NG54s.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/h2CBggVl.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/DE5wxwM-.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/DO71zc3K.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/57fd-8Rm.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CaE-nFIb.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/DD9LORog.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CzkxbnPC.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/sQk2ZJXP.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CMwZ8SX3.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CwGrDV7g.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/BweOr-HG.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/DIcpsLQS.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/B7KrtImZ.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/5k_H-M4h.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/DZenj9Hu.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/B1JUaVXP.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CD2vftFw.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/BihyrXkC.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/BmKgGYKq.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/7vidB3EQ.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/Bj8Ka_G4.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CCWOCFm7.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/C2wRG1UJ.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/BzKrw0Eo.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/jrrd6dRL.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CH6BGyAp.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/C_eEcEIp.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/D5x2-TS3.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/BxfvC2KB.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/Bdod4Ipr.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/4s4Iy95q.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/DHMwA_hR.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/veOrR7kn.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/BQQ4-Ix2.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/Bl-gMEVt.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/cw9vYyFs.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/kHP9fhcL.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/BeyX6RRR.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/zH1ZpJ79.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/BgHL96c2.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/1X5Jskmx.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/BNK5MYgw.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/DSXY0Md2.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/B-nI57xC.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/DEtASgjs.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CReB1TXd.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/C_Y3UFEq.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/D3rj4eBw.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/Bhmn_Tx0.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CrbPJ6Kt.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CNZfMSWC.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/BSIGbuW0.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/DmN4SZDV.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CVpci94V.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/9I5OzsjJ.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CYuAomVd.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/Dt_ow09k.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/B9ARfr3j.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/Dt1kmNdt.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CYGkvt1I.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/BQtOfr_q.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/DHltaXZU.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/0VGIc2uk.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/Del_xCvX.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/D0XtOzA2.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/DyBZ1Ki8.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/DSwuCec2.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/B_0_8FNg.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CfHz9NLm.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/GpcvRd_c.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/BXNOMSAZ.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/B8E-3pmb.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/FDA2nVoA.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/DbCaZO3P.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/BU19pVqB.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/TVOe89ou.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/Bft-MLIL.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CEj0116u.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CzMB2PYa.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/Ugii3Nt-.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/D0mC17rf.js">
+<link rel="modulepreload" as="script" crossorigin href="https://www.genspark.ai/_nuxt/gt7KOKft.js">
+<link rel="prefetch" as="style" crossorigin href="https://www.genspark.ai/_nuxt/MediaGallery.Bn_n8u2z.css">
+<link rel="prefetch" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CuAlAXCL.js">
+<link rel="prefetch" as="script" crossorigin href="https://www.genspark.ai/_nuxt/DRMRDRgZ.js">
+<link rel="prefetch" as="script" crossorigin href="https://www.genspark.ai/_nuxt/BrcpPT-Q.js">
+<link rel="prefetch" as="script" crossorigin href="https://www.genspark.ai/_nuxt/7oeuoYZX.js">
+<link rel="prefetch" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CS37SrOk.js">
+<link rel="prefetch" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CkqBsLkm.js">
+<link rel="prefetch" as="script" crossorigin href="https://www.genspark.ai/_nuxt/URTe2L_7.js">
+<link rel="prefetch" as="script" crossorigin href="https://www.genspark.ai/_nuxt/5nvv3Rmf.js">
+<link rel="prefetch" as="style" crossorigin href="https://www.genspark.ai/_nuxt/index_layout_9528.pwW86pSx.css">
+<link rel="prefetch" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CHZxElOA.js">
+<link rel="prefetch" as="script" crossorigin href="https://www.genspark.ai/_nuxt/BRFRQggj.js">
+<link rel="prefetch" as="script" crossorigin href="https://www.genspark.ai/_nuxt/CIVDLvzL.js">
+<link rel="prefetch" as="image" type="image/png" href="https://www.genspark.ai/_nuxt/kimi.BnD7Gu-O.png">
+<link rel="prefetch" as="image" type="image/png" href="https://www.genspark.ai/_nuxt/kling_icon.B9Oegjgb.png">
+<link rel="prefetch" as="image" type="image/png" href="https://www.genspark.ai/_nuxt/pixverse_icon.dA9T4Slk.png">
+<link rel="prefetch" as="image" type="image/png" href="https://www.genspark.ai/_nuxt/luma_icon.DbkLlrXJ.png">
+<link rel="prefetch" as="image" type="image/png" href="https://www.genspark.ai/_nuxt/hunyuan_icon.BXIfEhw_.png">
+<link rel="prefetch" as="image" type="image/png" href="https://www.genspark.ai/_nuxt/google.0ZkpJID5.png">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+<script type="text/javascript" data-hid="7fbaa41">
+            window.addEventListener('error', function (event) {
+              if (event.target.tagName === 'SCRIPT') {
+                window.parent.postMessage({
+                  type: 'chrome_extension_refresh_page',
+                }, 'chrome-extension://gefpcelbgaofbnehfglgibacfejejflp')
+              }
+            }, true);</script>
+<script type="text/javascript" data-hid="8368497">window.genspark_page_id = 'version_1756576562338';</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=984530900272144&ev=PageView&noscript=1" /></noscript>
+<meta name="theme-color" content="#fff">
+<link rel="manifest" href="/manifest.webmanifest">
+<script type="module" src="https://www.genspark.ai/_nuxt/Cn72toNb.js" crossorigin></script>
+<script id="unhead:payload" type="application/json">{"title":"Genspark"}</script>
+<link rel="preload" as="fetch" fetchpriority="low" crossorigin="anonymous" href="https://www.genspark.ai/_nuxt/builds/meta/edcf640f-389b-4bab-a416-25c2cfc0b4ec.json"></head><body><div id="__nuxt"><!--[--><!----><div class="n-config-provider" style="height:100%;" data-v-d008b395><div style="height:100%;" data-v-d008b395><!--[--><!--[--><div data-v-01ba8cbe><!--[--><div class="index-layout" data-v-d6a353a7><span data-v-d6a353a7></span><div class="loading index-layout-content j-index-layout-content" data-v-d6a353a7><!--[--><span data-v-01ba8cbe></span><!--]--></div><!----></div><!----><!--]--></div><!--]--><!----><!--]--></div><!----></div><!--]--></div><div id="teleports"></div><script type="application/json" data-nuxt-data="nuxt-app" data-ssr="true" id="__NUXT_DATA__">[["ShallowReactive",1],{"data":2,"state":8,"once":11,"_errors":12,"serverRendered":14,"path":15},["ShallowReactive",3],{"IS_CN":4,"IS_JP":4,"gensparkBrowserId":5,"headersValue":6},false,null,["null","user-agent",7],"curl/8.14.1",["Reactive",9],{"$snuxt-i18n-meta":10},{},["Set"],["ShallowReactive",13],{"headersValue":5,"IS_CN":5,"IS_JP":5},true,"/aidrive/files/style_examples/04_y2k_aesthetic.jpg"]</script>
+<script>window.__NUXT__={};window.__NUXT__.config={public:{APPLICATIONINSIGHTS_CONNECTION_STRING:"InstrumentationKey=5c09cc03-8ac4-449e-a543-7415b6801d7f;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westus2.livediagnostics.monitor.azure.com/",GOOGLE_CAPTCHA_SITE_KEY:"6Leq7KYqAAAAAGdd1NaUBJF9dHTPAKP7DcnaRc66",i18n:{baseUrl:"",defaultLocale:"en-US",defaultDirection:"ltr",strategy:"no_prefix",lazy:true,rootRedirect:"",routesNameSeparator:"___",defaultLocaleRouteNameSuffix:"default",skipSettingLocaleOnNavigate:false,differentDomains:false,trailingSlash:false,configLocales:[{code:"en-US",language:"en-US",name:"English (English)",files:["/app/frontend-nuxt/locales/en-US.json"]},{code:"de-DE",language:"de-DE",name:"German (Deutsch)",files:["/app/frontend-nuxt/locales/de-DE.json"]},{code:"es-ES",language:"es-ES",name:"Spanish (Español)",files:["/app/frontend-nuxt/locales/es-ES.json"]},{code:"fr-FR",language:"fr-FR",name:"French (Français)",files:["/app/frontend-nuxt/locales/fr-FR.json"]},{code:"hi-IN",language:"hi-IN",name:"Hindi (हिंदी)",files:["/app/frontend-nuxt/locales/hi-IN.json"]},{code:"it-IT",language:"it-IT",name:"Italian (Italiano)",files:["/app/frontend-nuxt/locales/it-IT.json"]},{code:"ja-JP",language:"ja-JP",name:"Japanese (日本語)",files:["/app/frontend-nuxt/locales/ja-JP.json"]},{code:"ko-KR",language:"ko-KR",name:"Korean (한국어)",files:["/app/frontend-nuxt/locales/ko-KR.json"]},{code:"pt-BR",language:"pt-BR",name:"Portuguese (Português)",files:["/app/frontend-nuxt/locales/pt-BR.json"]},{code:"zh-CN",language:"zh-CN",name:"Simplified Chinese (简体中文)",files:["/app/frontend-nuxt/locales/zh-CN.json"]},{code:"zh-TW",language:"zh-TW",name:"Traditional Chinese (繁體中文)",files:["/app/frontend-nuxt/locales/zh-TW.json"]},{code:"id-ID",language:"id-ID",name:"Indonesian (Bahasa Indonesia)",files:["/app/frontend-nuxt/locales/id-ID.json"]},{code:"ms-MY",language:"ms-MY",name:"Malay (Bahasa Melayu)",files:["/app/frontend-nuxt/locales/ms-MY.json"]},{code:"th-TH",language:"th-TH",name:"Thai (ไทย)",files:["/app/frontend-nuxt/locales/th-TH.json"]},{code:"ar-EG",language:"ar-EG",name:"Arabic (العربية)",dir:"rtl",files:["/app/frontend-nuxt/locales/ar-EG.json"]},{code:"ru-RU",language:"ru-RU",name:"Russian (Русский)",files:["/app/frontend-nuxt/locales/ru-RU.json"]}],locales:{"en-US":{domain:""},"de-DE":{domain:""},"es-ES":{domain:""},"fr-FR":{domain:""},"hi-IN":{domain:""},"it-IT":{domain:""},"ja-JP":{domain:""},"ko-KR":{domain:""},"pt-BR":{domain:""},"zh-CN":{domain:""},"zh-TW":{domain:""},"id-ID":{domain:""},"ms-MY":{domain:""},"th-TH":{domain:""},"ar-EG":{domain:""},"ru-RU":{domain:""}},detectBrowserLanguage:{alwaysRedirect:false,cookieCrossOrigin:false,cookieDomain:"",cookieKey:"i18n_set",cookieSecure:false,fallbackLocale:"en-US",redirectOn:"root",useCookie:true},experimental:{localeDetector:"",switchLocalePathLinkSSR:false,autoImportTranslationFunctions:false},multiDomainLocales:false}},app:{baseURL:"/",buildId:"edcf640f-389b-4bab-a416-25c2cfc0b4ec",buildAssetsDir:"/_nuxt/",cdnURL:"https://www.genspark.ai/"}}</script></body></html>
