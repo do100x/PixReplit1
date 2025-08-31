@@ -60,10 +60,12 @@ const App: React.FC = () => {
   // Effect to create and revoke object URLs safely for the current image
   useEffect(() => {
     if (currentImage) {
+      console.log('Creating URL for currentImage:', currentImage.name);
       const url = URL.createObjectURL(currentImage);
       setCurrentImageUrl(url);
       return () => URL.revokeObjectURL(url);
     } else {
+      console.log('No currentImage, setting URL to null');
       setCurrentImageUrl(null);
     }
   }, [currentImage]);
@@ -93,6 +95,7 @@ const App: React.FC = () => {
   }, [history, historyIndex]);
 
   const handleImageUpload = useCallback((file: File) => {
+    console.log('App.handleImageUpload called with:', file.name);
     setError(null);
     setHistory([file]);
     setHistoryIndex(0);

@@ -38,6 +38,7 @@ export default function StartScreen({ onImageUpload }: StartScreenProps) {
     if (files && files[0]) {
       const file = files[0];
       if (file.type.startsWith('image/')) {
+        console.log('File selected:', file.name, file.size);
         onImageUpload(file);
       }
     }
@@ -95,7 +96,10 @@ export default function StartScreen({ onImageUpload }: StartScreenProps) {
             <p className="text-muted-foreground mb-4 text-sm sm:text-base">Tap to browse photos or take a picture</p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Button 
-                onClick={() => cameraInputRef.current?.click()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  cameraInputRef.current?.click();
+                }}
                 className="bg-gradient-to-r from-primary to-purple-500 text-white px-6 py-4 font-medium hover:shadow-lg hover:shadow-primary/25 transition-all duration-200 touch-manipulation text-base min-h-[48px] active:scale-95 flex items-center gap-2"
                 data-testid="button-camera"
               >
@@ -103,7 +107,10 @@ export default function StartScreen({ onImageUpload }: StartScreenProps) {
                 Take Photo
               </Button>
               <Button 
-                onClick={() => galleryInputRef.current?.click()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  galleryInputRef.current?.click();
+                }}
                 variant="outline"
                 className="px-6 py-4 font-medium transition-all duration-200 touch-manipulation text-base min-h-[48px] active:scale-95 flex items-center gap-2"
                 data-testid="button-gallery"
