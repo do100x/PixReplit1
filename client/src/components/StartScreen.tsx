@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react';
-import { Upload, Camera, ImageIcon } from 'lucide-react';
+import { Upload, ImageIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface StartScreenProps {
@@ -31,14 +31,12 @@ const SAMPLE_IMAGES = [
 
 export default function StartScreen({ onImageUpload }: StartScreenProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const cameraInputRef = useRef<HTMLInputElement>(null);
   const galleryInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileSelect = useCallback((files: FileList | null) => {
     if (files && files[0]) {
       const file = files[0];
       if (file.type.startsWith('image/')) {
-        console.log('File selected:', file.name, file.size);
         onImageUpload(file);
       }
     }
@@ -93,32 +91,18 @@ export default function StartScreen({ onImageUpload }: StartScreenProps) {
           </div>
           <div>
             <h3 className="text-lg sm:text-xl font-semibold mb-2">Upload Your Image</h3>
-            <p className="text-muted-foreground mb-4 text-sm sm:text-base">Tap to browse photos or take a picture</p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-              <Button 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  cameraInputRef.current?.click();
-                }}
-                className="bg-gradient-to-r from-primary to-purple-500 text-white px-6 py-4 font-medium hover:shadow-lg hover:shadow-primary/25 transition-all duration-200 touch-manipulation text-base min-h-[48px] active:scale-95 flex items-center gap-2"
-                data-testid="button-camera"
-              >
-                <Camera className="w-5 h-5" />
-                Take Photo
-              </Button>
-              <Button 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  galleryInputRef.current?.click();
-                }}
-                variant="outline"
-                className="px-6 py-4 font-medium transition-all duration-200 touch-manipulation text-base min-h-[48px] active:scale-95 flex items-center gap-2"
-                data-testid="button-gallery"
-              >
-                <ImageIcon className="w-5 h-5" />
-                Choose from Gallery
-              </Button>
-            </div>
+            <p className="text-muted-foreground mb-4 text-sm sm:text-base">Tap to browse and select your photos</p>
+            <Button 
+              onClick={(e) => {
+                e.stopPropagation();
+                galleryInputRef.current?.click();
+              }}
+              className="bg-gradient-to-r from-primary to-purple-500 text-white px-8 py-4 font-medium hover:shadow-lg hover:shadow-primary/25 transition-all duration-200 touch-manipulation text-base min-h-[48px] active:scale-95 flex items-center gap-2"
+              data-testid="button-choose-file"
+            >
+              <ImageIcon className="w-5 h-5" />
+              Choose Photos
+            </Button>
           </div>
           <p className="text-xs sm:text-sm text-muted-foreground">
             Supports JPG, PNG, WebP up to 10MB
@@ -133,16 +117,6 @@ export default function StartScreen({ onImageUpload }: StartScreenProps) {
         onChange={handleFileInputChange}
         className="hidden"
         data-testid="input-file"
-      />
-      
-      <input
-        ref={cameraInputRef}
-        type="file"
-        accept="image/*"
-        capture="environment"
-        onChange={handleFileInputChange}
-        className="hidden"
-        data-testid="input-camera"
       />
       
       <input
