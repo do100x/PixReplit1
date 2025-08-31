@@ -365,15 +365,17 @@ const App: React.FC = () => {
             )}
 
             {activeTab === 'crop' ? (
-              <ReactCrop
-                crop={crop}
-                onChange={c => setCrop(c)}
-                onComplete={c => setCompletedCrop(c)}
-                aspect={aspect}
-                className="max-h-[70vh]"
-              >
-                {cropImageElement}
-              </ReactCrop>
+              <div className="flex justify-center items-center">
+                <ReactCrop
+                  crop={crop}
+                  onChange={c => setCrop(c)}
+                  onComplete={c => setCompletedCrop(c)}
+                  aspect={aspect}
+                  className="max-h-[70vh]"
+                >
+                  {cropImageElement}
+                </ReactCrop>
+              </div>
             ) : (
               <>
                 {imageDisplay}
