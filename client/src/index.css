@@ -72,6 +72,13 @@
 
   body {
     @apply font-sans antialiased bg-gradient-to-br from-background to-[hsl(234,30%,6%)] text-foreground min-h-screen;
+    /* Mobile optimization */
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Touch optimization */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
@@ -140,5 +147,40 @@
   }
   50% { 
     opacity: 0.7; 
+  }
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 640px) {
+  /* Improve tap targets */
+  button, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Better text scaling */
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+  
+  /* Optimized spacing */
+  .space-y-6 > * + * {
+    margin-top: 1rem;
+  }
+  
+  /* Better image handling */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* React Image Crop mobile optimization */
+  .ReactCrop__crop-selection {
+    touch-action: none;
+  }
+  
+  .ReactCrop__drag-handle {
+    width: 16px;
+    height: 16px;
   }
 }

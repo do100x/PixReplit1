@@ -40,20 +40,20 @@ export default function FilterPanel({
   }, [prompt, onApplyFilter]);
 
   return (
-    <div className="bg-card border border-border rounded-lg p-6">
-      <div className="text-center mb-6">
-        <h3 className="text-lg font-semibold mb-2">Creative Filters</h3>
-        <p className="text-muted-foreground">Apply artistic styles and effects to your image</p>
+    <div className="bg-card border border-border rounded-lg p-4 sm:p-6">
+      <div className="text-center mb-4 sm:mb-6">
+        <h3 className="text-base sm:text-lg font-semibold mb-2">Creative Filters</h3>
+        <p className="text-muted-foreground text-sm sm:text-base">Apply artistic styles and effects to your image</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="flex items-center gap-3 mb-6">
+      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-4 sm:mb-6">
         <div className="flex-1">
           <Input
             type="text"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            placeholder="e.g., 'vintage film look', 'cyberpunk style', 'oil painting effect'"
-            className="w-full bg-input border border-border text-foreground text-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 placeholder:text-muted-foreground"
+            placeholder="e.g., 'vintage film look', 'cyberpunk style'"
+            className="w-full bg-input border border-border text-foreground text-base sm:text-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 placeholder:text-muted-foreground min-h-[48px]"
             disabled={isLoading}
             data-testid="input-filter-prompt"
           />
@@ -61,7 +61,7 @@ export default function FilterPanel({
         <Button
           type="submit"
           disabled={isLoading || !prompt.trim()}
-          className="bg-gradient-to-r from-primary to-purple-500 text-white font-semibold py-3 px-8 hover:shadow-lg hover:shadow-primary/25 transition-all duration-200 hover:-translate-y-0.5 active:scale-95 disabled:from-primary/50 disabled:to-purple-500/50 disabled:shadow-none disabled:cursor-not-allowed disabled:transform-none"
+          className="bg-gradient-to-r from-primary to-purple-500 text-white font-semibold py-3 px-6 sm:px-8 hover:shadow-lg hover:shadow-primary/25 transition-all duration-200 hover:-translate-y-0.5 active:scale-95 disabled:from-primary/50 disabled:to-purple-500/50 disabled:shadow-none disabled:cursor-not-allowed disabled:transform-none touch-manipulation min-h-[48px]"
           data-testid="button-apply-filter"
         >
           Apply
@@ -69,18 +69,18 @@ export default function FilterPanel({
       </form>
 
       {/* Filter Presets */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
         {FILTER_PRESETS.map((filter) => (
           <div
             key={filter.id}
-            className="group cursor-pointer"
+            className="group cursor-pointer touch-manipulation"
             onClick={() => !isLoading && onApplyFilter(filter.prompt)}
             data-testid={`filter-preset-${filter.id}`}
           >
             <div 
-              className={`aspect-square bg-gradient-to-br ${filter.gradient} rounded-lg mb-2 transition-transform duration-200 group-hover:scale-105 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`aspect-square bg-gradient-to-br ${filter.gradient} rounded-lg mb-2 transition-transform duration-200 group-hover:scale-105 active:scale-95 min-h-[80px] sm:min-h-[100px] ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
             ></div>
-            <p className="text-sm font-medium text-center">{filter.name}</p>
+            <p className="text-xs sm:text-sm font-medium text-center">{filter.name}</p>
           </div>
         ))}
       </div>

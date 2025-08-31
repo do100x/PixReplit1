@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, { useState, useCallback, useRef, useEffect, useRef as useRef2 } from 'react';
 import ReactCrop, { type Crop, type PixelCrop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import { generateEditedImage, generateFilteredImage, generateAdjustedImage } from './services/geminiService';
@@ -46,6 +46,9 @@ const App: React.FC = () => {
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
   const [aspect, setAspect] = useState<number | undefined>();
   const [isComparing, setIsComparing] = useState<boolean>(false);
+  
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+  const touchEndRef = useRef<{ x: number; y: number } | null>(null);
 
   const imgRef = useRef<HTMLImageElement>(null);
   const currentImage = history[historyIndex] ?? null;
@@ -274,6 +277,44 @@ const App: React.FC = () => {
     }
   };
 
+  const tabs: Tab[] = ['retouch', 'adjust', 'filters', 'crop'];
+  
+  const handleSwipe = useCallback((direction: 'left' | 'right') => {
+    const currentIndex = tabs.indexOf(activeTab);
+    if (direction === 'left' && currentIndex < tabs.length - 1) {
+      setActiveTab(tabs[currentIndex + 1]);
+    } else if (direction === 'right' && currentIndex > 0) {
+      setActiveTab(tabs[currentIndex - 1]);
+    }
+  }, [activeTab]);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+  }, []);
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (!touchStartRef.current) return;
+    
+    const touch = e.changedTouches[0];
+    touchEndRef.current = { x: touch.clientX, y: touch.clientY };
+    
+    const deltaX = touchEndRef.current.x - touchStartRef.current.x;
+    const deltaY = Math.abs(touchEndRef.current.y - touchStartRef.current.y);
+    
+    // Only trigger swipe if horizontal movement is significant and vertical is minimal
+    if (Math.abs(deltaX) > 50 && deltaY < 100) {
+      if (deltaX > 0) {
+        handleSwipe('right');
+      } else {
+        handleSwipe('left');
+      }
+    }
+    
+    touchStartRef.current = null;
+    touchEndRef.current = null;
+  }, [handleSwipe]);
+
   const handleImageClick = (e: React.MouseEvent<HTMLImageElement>) => {
     if (activeTab !== 'retouch') return;
 
@@ -322,7 +363,7 @@ const App: React.FC = () => {
             key={originalImageUrl}
             src={originalImageUrl}
             alt="Original"
-            className="w-full h-auto object-contain max-h-[60vh] rounded-xl pointer-events-none"
+            className="w-full h-auto object-contain max-h-[40vh] sm:max-h-[60vh] rounded-xl pointer-events-none"
           />
         )}
 
@@ -333,7 +374,7 @@ const App: React.FC = () => {
           src={currentImageUrl}
           alt="Current"
           onClick={handleImageClick}
-          className={`absolute top-0 left-0 w-full h-auto object-contain max-h-[60vh] rounded-xl transition-opacity duration-200 ease-in-out ${
+          className={`absolute top-0 left-0 w-full h-auto object-contain max-h-[40vh] sm:max-h-[60vh] rounded-xl transition-opacity duration-200 ease-in-out ${
             isComparing ? 'opacity-0' : 'opacity-100'
           } ${activeTab === 'retouch' ? 'cursor-crosshair' : ''}`}
         />
@@ -347,12 +388,12 @@ const App: React.FC = () => {
         key={`crop-${currentImageUrl}`}
         src={currentImageUrl}
         alt="Crop this image"
-        className="w-full h-auto object-contain max-h-[60vh] rounded-xl"
+        className="w-full h-auto object-contain max-h-[40vh] sm:max-h-[60vh] rounded-xl"
       />
     );
 
     return (
-      <div className="w-full max-w-6xl mx-auto animate-fade-in space-y-6 relative">
+      <div className="w-full max-w-6xl mx-auto animate-fade-in space-y-4 sm:space-y-6 relative px-4 sm:px-0">
         {/* Image Canvas Area */}
         <div className="relative">
           <div className="relative bg-gray-900/50 border border-gray-700 rounded-xl overflow-hidden">
@@ -371,7 +412,7 @@ const App: React.FC = () => {
                   onChange={c => setCrop(c)}
                   onComplete={c => setCompletedCrop(c)}
                   aspect={aspect}
-                  className="max-h-[70vh]"
+                  className="max-h-[50vh] sm:max-h-[70vh]"
                 >
                   {cropImageElement}
                 </ReactCrop>
@@ -381,7 +422,7 @@ const App: React.FC = () => {
                 {imageDisplay}
                 {displayHotspot && !isLoading && activeTab === 'retouch' && imgRef.current && (
                   <div
-                    className="absolute w-6 h-6 bg-blue-400 border-2 border-white rounded-full -translate-x-1/2 -translate-y-1/2 z-10"
+                    className="absolute w-8 h-8 sm:w-6 sm:h-6 bg-blue-400 border-2 border-white rounded-full -translate-x-1/2 -translate-y-1/2 z-10 touch-manipulation"
                     style={{
                       left: `${displayHotspot.x}px`,
                       top: `${displayHotspot.y}px`
@@ -402,7 +443,10 @@ const App: React.FC = () => {
         </div>
 
         {/* Tab Navigation */}
-        <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-1 flex items-center gap-1">
+        <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-1 grid grid-cols-4 gap-1 sm:flex sm:items-center relative">
+          <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs text-gray-500 sm:hidden">
+            Swipe left or right to switch tabs
+          </div>
           {[
             { id: 'retouch', label: 'Retouch' },
             { id: 'adjust', label: 'Adjust' },
@@ -412,10 +456,10 @@ const App: React.FC = () => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as Tab)}
-              className={`w-full py-3 px-6 rounded-md font-semibold transition-all duration-200 ${
+              className={`w-full py-4 px-3 sm:px-6 rounded-md font-semibold transition-all duration-200 touch-manipulation min-h-[48px] ${
                 activeTab === tab.id
                   ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-lg'
-                  : 'text-gray-400 hover:text-white hover:bg-gray-700/50'
+                  : 'text-gray-400 hover:text-white hover:bg-gray-700/50 active:bg-gray-700'
               }`}
             >
               {tab.label}
@@ -424,26 +468,30 @@ const App: React.FC = () => {
         </div>
 
         {/* Tab Content Panels */}
-        <div className="space-y-6">
+        <div 
+          className="space-y-6"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           {activeTab === 'retouch' && (
-            <div className="w-full bg-gray-800/50 border border-gray-700 rounded-lg p-4 flex flex-col gap-4 animate-fade-in backdrop-blur-sm">
-              <h3 className="text-lg font-semibold text-center text-gray-300">
-                {editHotspot ? 'Describe your precise edit' : 'Click a point on the image'}
+            <div className="w-full bg-gray-800/50 border border-gray-700 rounded-lg p-4 sm:p-6 flex flex-col gap-3 sm:gap-4 animate-fade-in backdrop-blur-sm">
+              <h3 className="text-base sm:text-lg font-semibold text-center text-gray-300">
+                {editHotspot ? 'Describe your precise edit' : 'Tap a point on the image'}
               </h3>
               
-              <div className="flex items-center gap-3">
+              <div className="flex flex-col sm:flex-row items-stretch gap-3">
                 <input
                   type="text"
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
-                  placeholder={editHotspot ? "e.g., 'remove this blemish', 'change shirt color to blue', 'add sunglasses'" : "First click a point on the image"}
-                  className="flex-grow bg-gray-800 border border-gray-600 text-gray-200 rounded-lg p-4 focus:ring-2 focus:ring-blue-500 focus:outline-none transition w-full disabled:cursor-not-allowed disabled:opacity-60 text-base"
+                  placeholder={editHotspot ? "e.g., 'remove this blemish', 'change shirt color'" : "First tap a point on the image"}
+                  className="flex-grow bg-gray-800 border border-gray-600 text-gray-200 rounded-lg p-4 focus:ring-2 focus:ring-blue-500 focus:outline-none transition w-full disabled:cursor-not-allowed disabled:opacity-60 text-sm sm:text-base min-h-[48px]"
                   disabled={isLoading || !editHotspot}
                 />
                 <button
                   onClick={handleGenerate}
                   disabled={isLoading || !prompt.trim() || !editHotspot}
-                  className="bg-gradient-to-br from-blue-600 to-blue-500 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 ease-in-out shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/40 hover:-translate-y-px active:scale-95 active:shadow-inner text-base disabled:from-blue-800 disabled:to-blue-700 disabled:shadow-none disabled:cursor-not-allowed disabled:transform-none"
+                  className="bg-gradient-to-br from-blue-600 to-blue-500 text-white font-bold py-4 px-6 sm:px-8 rounded-lg transition-all duration-300 ease-in-out shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/40 hover:-translate-y-px active:scale-95 active:shadow-inner text-sm sm:text-base disabled:from-blue-800 disabled:to-blue-700 disabled:shadow-none disabled:cursor-not-allowed disabled:transform-none touch-manipulation min-h-[48px] whitespace-nowrap"
                 >
                   Generate
                 </button>
@@ -491,15 +539,15 @@ const App: React.FC = () => {
     }}>
       <Header />
       
-      <main className="p-8">
+      <main className="p-4 sm:p-6 lg:p-8">
         <div className="flex flex-col items-center gap-8">
           {/* Toolbar */}
           {currentImage && (
-            <div className="flex items-center gap-3 bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg px-4 py-3">
+            <div className="flex items-center justify-center gap-2 sm:gap-3 bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg px-3 sm:px-4 py-3">
               <button
                 onClick={handleUndo}
                 disabled={!canUndo}
-                className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-3 sm:p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation min-h-[48px] min-w-[48px] flex items-center justify-center active:scale-95"
                 title="Undo"
               >
                 <UndoIcon className="w-5 h-5" />
@@ -508,7 +556,7 @@ const App: React.FC = () => {
               <button
                 onClick={handleRedo}
                 disabled={!canRedo}
-                className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-3 sm:p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation min-h-[48px] min-w-[48px] flex items-center justify-center active:scale-95"
                 title="Redo"
               >
                 <RedoIcon className="w-5 h-5" />
@@ -519,7 +567,7 @@ const App: React.FC = () => {
               {historyIndex > 0 && (
                 <button
                   onClick={() => setIsComparing(!isComparing)}
-                  className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-md transition-colors"
+                  className="p-3 sm:p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-md transition-colors touch-manipulation min-h-[48px] min-w-[48px] flex items-center justify-center active:scale-95"
                   title="Compare with original"
                 >
                   <EyeIcon className="w-5 h-5" />
@@ -530,21 +578,21 @@ const App: React.FC = () => {
               
               <button
                 onClick={handleReset}
-                className="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-700 rounded-md transition-colors"
+                className="px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-700 rounded-md transition-colors touch-manipulation min-h-[48px] active:scale-95"
               >
                 Reset
               </button>
               
               <button
                 onClick={handleUploadNew}
-                className="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-700 rounded-md transition-colors"
+                className="px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-700 rounded-md transition-colors touch-manipulation min-h-[48px] active:scale-95"
               >
                 New Image
               </button>
               
               <button
                 onClick={handleDownload}
-                className="px-4 py-2 text-sm font-medium bg-gradient-to-r from-green-600 to-green-500 text-white rounded-md hover:shadow-lg hover:shadow-green-500/25 transition-all duration-200"
+                className="px-4 py-3 text-sm font-medium bg-gradient-to-r from-green-600 to-green-500 text-white rounded-md hover:shadow-lg hover:shadow-green-500/25 transition-all duration-200 touch-manipulation min-h-[48px] active:scale-95"
               >
                 Download
               </button>

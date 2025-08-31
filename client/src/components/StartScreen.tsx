@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react';
-import { Upload } from 'lucide-react';
+import { Upload, Camera, ImageIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface StartScreenProps {
@@ -31,6 +31,8 @@ const SAMPLE_IMAGES = [
 
 export default function StartScreen({ onImageUpload }: StartScreenProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
+  const galleryInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileSelect = useCallback((files: FileList | null) => {
     if (files && files[0]) {
@@ -66,39 +68,52 @@ export default function StartScreen({ onImageUpload }: StartScreenProps) {
   }, [onImageUpload]);
 
   return (
-    <div className="w-full max-w-4xl mx-auto animate-fade-in">
-      <div className="text-center mb-8">
-        <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
+    <div className="w-full max-w-4xl mx-auto animate-fade-in px-4 sm:px-0">
+      <div className="text-center mb-6 sm:mb-8">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
           AI-Powered Photo Editor
         </h2>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4 sm:px-0">
           Upload your image and transform it with AI. Retouch, apply filters, make adjustments, and crop with simple text prompts.
         </p>
       </div>
 
       {/* Upload Zone */}
       <div 
-        className="border-2 border-dashed border-border hover:border-primary/50 rounded-xl p-12 text-center transition-all duration-300 hover:bg-accent/20 cursor-pointer"
+        className="border-2 border-dashed border-border hover:border-primary/50 rounded-xl p-8 sm:p-12 text-center transition-all duration-300 hover:bg-accent/20 cursor-pointer touch-manipulation"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onClick={() => fileInputRef.current?.click()}
         data-testid="upload-zone"
       >
         <div className="flex flex-col items-center gap-4">
-          <div className="w-16 h-16 bg-gradient-to-r from-primary to-purple-500 rounded-full flex items-center justify-center">
-            <Upload className="w-8 h-8 text-white" />
+          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-primary to-purple-500 rounded-full flex items-center justify-center">
+            <Upload className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
           </div>
           <div>
-            <h3 className="text-xl font-semibold mb-2">Upload Your Image</h3>
-            <p className="text-muted-foreground mb-4">Drag and drop your image here, or click to browse</p>
-            <Button 
-              className="bg-gradient-to-r from-primary to-purple-500 text-white px-6 py-3 font-medium hover:shadow-lg hover:shadow-primary/25 transition-all duration-200"
-              data-testid="button-choose-file"
-            >
-              Choose File
-            </Button>
+            <h3 className="text-lg sm:text-xl font-semibold mb-2">Upload Your Image</h3>
+            <p className="text-muted-foreground mb-4 text-sm sm:text-base">Tap to browse photos or take a picture</p>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <Button 
+                onClick={() => cameraInputRef.current?.click()}
+                className="bg-gradient-to-r from-primary to-purple-500 text-white px-6 py-4 font-medium hover:shadow-lg hover:shadow-primary/25 transition-all duration-200 touch-manipulation text-base min-h-[48px] active:scale-95 flex items-center gap-2"
+                data-testid="button-camera"
+              >
+                <Camera className="w-5 h-5" />
+                Take Photo
+              </Button>
+              <Button 
+                onClick={() => galleryInputRef.current?.click()}
+                variant="outline"
+                className="px-6 py-4 font-medium transition-all duration-200 touch-manipulation text-base min-h-[48px] active:scale-95 flex items-center gap-2"
+                data-testid="button-gallery"
+              >
+                <ImageIcon className="w-5 h-5" />
+                Choose from Gallery
+              </Button>
+            </div>
           </div>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs sm:text-sm text-muted-foreground">
             Supports JPG, PNG, WebP up to 10MB
           </p>
         </div>
@@ -112,24 +127,43 @@ export default function StartScreen({ onImageUpload }: StartScreenProps) {
         className="hidden"
         data-testid="input-file"
       />
+      
+      <input
+        ref={cameraInputRef}
+        type="file"
+        accept="image/*"
+        capture="environment"
+        onChange={handleFileInputChange}
+        className="hidden"
+        data-testid="input-camera"
+      />
+      
+      <input
+        ref={galleryInputRef}
+        type="file"
+        accept="image/*"
+        onChange={handleFileInputChange}
+        className="hidden"
+        data-testid="input-gallery"
+      />
 
       {/* Sample Images */}
-      <div className="mt-12">
-        <h3 className="text-lg font-semibold mb-6 text-center">Or try with sample images</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="mt-8 sm:mt-12">
+        <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-center">Or try with sample images</h3>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
           {SAMPLE_IMAGES.map((image, index) => (
             <div 
               key={index}
-              className="group cursor-pointer"
+              className="group cursor-pointer touch-manipulation"
               onClick={() => handleSampleImageClick(image.url, image.label)}
               data-testid={`sample-image-${image.label.toLowerCase()}`}
             >
               <img 
                 src={image.url} 
                 alt={image.alt} 
-                className="w-full h-24 object-cover rounded-lg group-hover:shadow-lg transition-all duration-200" 
+                className="w-full h-20 sm:h-24 object-cover rounded-lg group-hover:shadow-lg transition-all duration-200 active:scale-95" 
               />
-              <p className="text-sm text-muted-foreground mt-2 text-center">{image.label}</p>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-2 text-center">{image.label}</p>
             </div>
           ))}
         </div>
